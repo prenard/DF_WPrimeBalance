@@ -1,0 +1,31 @@
+<resources>
+    <properties>
+        <property id="CP" type="number">250</property>
+        <property id="WPRIME" type="number">20000</property>
+        <property id="FORMULA" type="number">0</property>
+    </properties>
+
+    <strings>
+       <string id="CP_title">CP (Watts)</string>
+       <string id="WPRIME_title">W' (J)</string>
+       <string id="FORMULA_title">Compute method (default: Integral)</string>
+       <string id="INTEGRAL_title">Integral</string>
+       <string id="DIFFERENTIAL_title">Differential</string>
+    </strings>
+
+    <settings>
+        <setting propertyKey="@Properties.CP" title="@Strings.CP_title">
+            <settingConfig type="numeric" />
+        </setting>
+
+        <setting propertyKey="@Properties.WPRIME" title="@Strings.WPRIME_title">
+            <settingConfig type="numeric" />
+        </setting>
+        <setting propertyKey="@Properties.FORMULA" title="@Strings.FORMULA_title">
+          <settingConfig type="list">
+              <listEntry value="0">@Strings.INTEGRAL_title</listEntry>
+              <listEntry value="1">@Strings.DIFFERENTIAL_title</listEntry>
+          </settingConfig>
+        </setting>
+    </settings>
+</resources>
