@@ -23,13 +23,14 @@
 
 using Toybox.WatchUi as Ui;
 using Toybox.System as Sys;
+using Toybox.Application as App;
 
 class WPRIMEBALView extends Ui.SimpleDataField {
 
 	// Constants
-	var CP; // = 250;
-	var WPRIME; // = 20000;
-	var FORMULA; // = 0;
+	var CP;
+	var WPRIME;
+	var FORMULA;
 
 	// Variables
 	var elapsedSec = 0;
@@ -45,13 +46,12 @@ class WPRIMEBALView extends Ui.SimpleDataField {
 	var W = 0;
 	
     //! Set the label of the data field here.
-    function initialize(parameterCP, parameterWPRIME, parameterFORMULA) {
+    function initialize() {
         SimpleDataField.initialize();
-        
-        CP = parameterCP.toNumber();
-		WPRIME = parameterWPRIME.toNumber();
-		FORMULA = parameterFORMULA.toNumber();
-		
+		CP = App.getApp().getProperty("CP").toNumber();
+		WPRIME = App.getApp().getProperty("WPRIME").toNumber();
+    	FORMULA = App.getApp().getProperty("FORMULA").toNumber();
+    	
 		// If the formula is differential, initial value of w'bal is WPRIME.
 		if (FORMULA == 1) {
 			wprimebal = WPRIME;

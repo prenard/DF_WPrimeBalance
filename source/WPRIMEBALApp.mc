@@ -39,11 +39,7 @@ class WPRIMEBALApp extends App.AppBase {
 
     //! Return the initial view of your application here
     function getInitialView() {
-    	var app = App.getApp();
-    	var parameterCP = app.getProperty("CP");
-    	var parameterWPRIME = app.getProperty("WPRIME");
-    	var parameterFORMULA = app.getProperty("FORMULA");
-        return [ new WPRIMEBALView(parameterCP, parameterWPRIME, parameterFORMULA) ];
+        return [ new WPRIMEBALView() ];
     }
 
 }
