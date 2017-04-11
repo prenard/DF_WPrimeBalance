@@ -31,6 +31,7 @@ class WPRIMEBALView extends Ui.SimpleDataField {
 	var CP;
 	var WPRIME;
 	var FORMULA;
+	var VALUE;
 
 	// Variables
 	var elapsedSec = 0;
@@ -51,7 +52,7 @@ class WPRIMEBALView extends Ui.SimpleDataField {
 		CP = App.getApp().getProperty("CP").toNumber();
 		WPRIME = App.getApp().getProperty("WPRIME").toNumber();
     	FORMULA = App.getApp().getProperty("FORMULA").toNumber();
-    	
+    	VALUE = App.getApp().getProperty("VALUE").toNumber();
 		// If the formula is differential, initial value of w'bal is WPRIME.
 		if (FORMULA == 1) {
 			wprimebal = WPRIME;
@@ -59,12 +60,23 @@ class WPRIMEBALView extends Ui.SimpleDataField {
 		
 		// Change the field title with the compute method choosen
 		if (FORMULA == 0) {
-			label = "% W' Bal (int)";
+			if (VALUE == 0) {
+				label = "% W' Bal (int)";
+			}
+			else {
+				label = "kJ W' Bal (int)";
+			}
 		}
 		else {
-			label = "% W' Bal (diff)";
-		}
+			if (VALUE == 0) {
+				label = "% W' Bal (diff)";
+			}
+			else {
+				label = "kJ W' Bal (diff)";
+			}
+    	}
     }
+    
 
     //! The given info object contains all the current workout
     //! information. Calculate a value and return it in this method.
@@ -72,7 +84,7 @@ class WPRIMEBALView extends Ui.SimpleDataField {
         // See Activity.Info in the documentation for available information.
         
         // Check if the activity is started or not
-		if (info.elapsedTime != null && info.elapsedTime != 0) {
+		if (info.elapsedTime > 0) {
 			
 			// Check if power is negaative or null, and normalize it to 0.
 			if (info.currentPower == null) {
@@ -91,10 +103,10 @@ class WPRIMEBALView extends Ui.SimpleDataField {
 			// Method by differential equation Froncioni / Clarke
 			if (FORMULA == 1) {
 				if (pwr < CP) {
-				  wprimebal = wprimebal + (CP-pwr)*(WPRIME-wprimebal)/WPRIME.toFloat();
+				  	wprimebal = wprimebal + (CP-pwr)*(WPRIME-wprimebal)/WPRIME.toFloat();
 				}
 				else {
-				  wprimebal = wprimebal + (CP-pwr);
+					wprimebal = wprimebal + (CP-pwr);
 				}
 			}
 			
@@ -125,8 +137,13 @@ class WPRIMEBALView extends Ui.SimpleDataField {
 				wprimebal = WPRIME - output;
 			}
 			
-			// Compute a percentage from raw values
-			wprimebalpc = wprimebal * (100/WPRIME.toFloat());
+			if (VALUE == 0) {
+				// Compute a percentage from raw values
+				wprimebalpc = wprimebal * (100/WPRIME.toFloat());
+			}
+			else {
+				wprimebalpc = wprimebal/1000;
+			}
 			
 			// One more second in life...
 			elapsedSec++;
@@ -134,10 +151,11 @@ class WPRIMEBALView extends Ui.SimpleDataField {
 		else {
 			// Initial display, before the the session is started
 			return CP + "|" + WPRIME;
+			Sys.println("Elapsed time: " + info.elapsedTime);
 		}
 
 		// For debug purposes on the simulator only
-		Sys.println(FORMULA + ";" + elapsedSec + ";" + pwr + ";" + wprimebal + ";" + TAUlive);
+		Sys.println("FORMULA: " + FORMULA + " - ELAPSED SEC: " + elapsedSec + " - POWER: " + pwr + " - WPRIMEBAL: " + wprimebal + " - TAULIVE: " + TAUlive);
 		
 		// Return the value to the watch
 		return wprimebalpc.format("%.1f");
