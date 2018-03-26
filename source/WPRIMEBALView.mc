@@ -24,16 +24,19 @@
 using Toybox.WatchUi as Ui;
 using Toybox.System as Sys;
 using Toybox.Application as App;
+using Toybox.FitContributor as Fit;
 
 class WPRIMEBALView extends Ui.SimpleDataField {
 
 	// Constants
+	const WPRIME_BAL_FIELD_ID = 0;
 	var CP;
 	var WPRIME;
 	var FORMULA;
 	var VALUE;
 
 	// Variables
+	var wprimebalField = null;
 	var elapsedSec = 0;
 	var pwr = 0;
 	var powerValue;
@@ -51,8 +54,8 @@ class WPRIMEBALView extends Ui.SimpleDataField {
         SimpleDataField.initialize();
 		CP = App.getApp().getProperty("CP").toNumber();
 		WPRIME = App.getApp().getProperty("WPRIME").toNumber();
-    	FORMULA = App.getApp().getProperty("FORMULA").toNumber();
-    	VALUE = App.getApp().getProperty("VALUE").toNumber();
+    		FORMULA = App.getApp().getProperty("FORMULA").toNumber();
+    		VALUE = App.getApp().getProperty("VALUE").toNumber();
 		// If the formula is differential, initial value of w'bal is WPRIME.
 		if (FORMULA == 1) {
 			wprimebal = WPRIME;
@@ -74,7 +77,15 @@ class WPRIMEBALView extends Ui.SimpleDataField {
 			else {
 				label = "kJ W' Bal (diff)";
 			}
-    	}
+    		}
+    		// Create the custom FIT data field we want to record.
+        wprimebalField = createField(
+            "wprime_bal",
+            WPRIME_BAL_FIELD_ID,
+            Fit.DATA_TYPE_FLOAT,
+            {:mesgType=>Fit.MESG_TYPE_RECORD, :units=>"kJ"}
+        );
+        wprimebalField.setData(wprimebal/1000);
     }
     
 
@@ -158,6 +169,7 @@ class WPRIMEBALView extends Ui.SimpleDataField {
 		Sys.println("FORMULA: " + FORMULA + " - ELAPSED SEC: " + elapsedSec + " - POWER: " + pwr + " - WPRIMEBAL: " + wprimebal + " - TAULIVE: " + TAUlive);
 		
 		// Return the value to the watch
+		wprimebalField.setData(wprimebal/1000);
 		return wprimebalpc.format("%.1f");
     }
 }

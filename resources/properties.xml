@@ -15,6 +15,8 @@
        <string id="VALUE_title">Display units</string>
        <string id="PERCENT_title">%</string>
        <string id="KJ_title">kJ</string>
+    	   <string id="field_label">W' Bal</string>
+       <string id="field_units">kJ</string>
     </strings>
 
     <settings>
@@ -36,4 +38,8 @@
         		<listEntry value="0">@Strings.PERCENT_title</listEntry>
         		<listEntry value="1">@Strings.KJ_title</listEntry></settingConfig></setting>
     </settings>
+    
+    <fitContributions>        
+        <fitField id="0" displayInActivitySummary="false" displayInChart="true" sortOrder="0" precision="0" dataLabel="@Strings.field_label" chartTitle="@Strings.field_label" fillColor="#C80014" unitLabel="@Strings.field_units"  />
+	</fitContributions>
 </resources>
