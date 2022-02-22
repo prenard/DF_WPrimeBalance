@@ -80,11 +80,7 @@ class WPRIMEBALView extends Ui.SimpleDataField {
     		}
     		// Create the custom FIT data field we want to record.
         wprimebalField = createField(
-<<<<<<< HEAD
             "W' Balance",
-=======
-            "wprime_bal",
->>>>>>> 30ce6f6214b9f7df8445ee853fd8bc04a2252ddc
             WPRIME_BAL_FIELD_ID,
             Fit.DATA_TYPE_FLOAT,
             {:mesgType=>Fit.MESG_TYPE_RECORD, :units=>"kJ"}

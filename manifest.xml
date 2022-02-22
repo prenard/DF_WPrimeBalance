@@ -3,7 +3,6 @@
 <iq:manifest xmlns:iq="http://www.garmin.com/xml/connectiq" version="1">
     <iq:application entry="WPRIMEBALApp" id="36a89d25-1548-44a8-9be0-4cd374bb3bba" launcherIcon="@Drawables.LauncherIcon" minSdkVersion="1.4.0" name="@Strings.AppName" type="datafield">
         <iq:products>
-<<<<<<< HEAD
             <iq:product id="edge130"/>
             <iq:product id="edge130plus"/>
             <iq:product id="edge_520"/>
@@ -15,25 +14,6 @@
             <iq:product id="edge1030"/>
             <iq:product id="edge1030bontrager"/>
             <iq:product id="edge1030plus"/>
-=======
-            <iq:product id="d2bravo"/>
-            <iq:product id="d2bravo_titanium"/>
-            <iq:product id="d2charlie"/>
-            <iq:product id="descentmk1"/>
-            <iq:product id="edge1030"/>
-            <iq:product id="edge820"/>
-            <iq:product id="edge_1000"/>
-            <iq:product id="edge_520"/>
-            <iq:product id="fenix3"/>
-            <iq:product id="fenix3_hr"/>
-            <iq:product id="fenix5"/>
-            <iq:product id="fenix5s"/>
-            <iq:product id="fenix5x"/>
-            <iq:product id="fenixchronos"/>
-            <iq:product id="fr735xt"/>
-            <iq:product id="fr920xt"/>
-            <iq:product id="fr935"/>
->>>>>>> 30ce6f6214b9f7df8445ee853fd8bc04a2252ddc
         </iq:products>
         <iq:permissions>
             <iq:uses-permission id="FitContributor"/>
@@ -42,9 +22,6 @@
             <iq:language>eng</iq:language>
             <iq:language>fre</iq:language>
         </iq:languages>
-<<<<<<< HEAD
         <iq:barrels/>
-=======
->>>>>>> 30ce6f6214b9f7df8445ee853fd8bc04a2252ddc
     </iq:application>
 </iq:manifest>
